@@ -63,6 +63,7 @@ public class LocationTrackerService extends Service implements LocationListener 
         return super.onUnbind(intent);
     }
 
+    @Override
     public void onTaskRemoved(Intent rootIntent) {
         super.onTaskRemoved(rootIntent);
 
