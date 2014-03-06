@@ -1,6 +1,7 @@
 package net.ablunier.servicestesting.service;
 
 import android.app.AlarmManager;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
@@ -31,26 +32,33 @@ public class LocationTrackerService extends Service implements LocationListener 
     private String mProvider;
 
     // The minimum distance to change Updates in meters
-    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 100; // 10 meters
+    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 100; // 100 meters
 
     // The minimum time between updates in milliseconds
     private static final long MIN_TIME_BW_UPDATES = 3000 * 60 * 1; // 3 minute
 
     @Override
+    public void onCreate() {
+        super.onCreate();
+
+        writeToFile("onCreate");
+
+        startLocationTracking();
+    }
+
+    @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
 
-        Log.wtf("LocationTrackerService", "onStartCommand");
         writeToFile("onStartCommand");
 
-        startLocationTracking();
+        // startLocationTracking();
 
         return START_STICKY;
     }
 
     @Override
     public IBinder onBind(Intent intent) {
-        Log.wtf("LocationTrackerService", "onBind");
         writeToFile("onBind");
 
         return null;

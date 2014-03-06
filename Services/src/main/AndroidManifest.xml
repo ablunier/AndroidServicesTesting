@@ -22,8 +22,9 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".service.LocationTrackerService"
-            android:process=":LocationTrackerServiceProcess"
+        <service
+            android:name=".service.LocationTrackerService"
+            android:enabled="true"
             android:icon="@drawable/ic_launcher"
             android:label="LocationTrackerService">
         </service>
